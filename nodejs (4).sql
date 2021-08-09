@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2021 at 04:38 PM
+-- Generation Time: Aug 09, 2021 at 04:53 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -20,6 +20,119 @@ SET time_zone = "+00:00";
 --
 -- Database: `nodejs`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `covid_user`
+--
+
+CREATE TABLE `covid_user` (
+  `TestID` int(11) NOT NULL,
+  `ClientName` varchar(80) NOT NULL,
+  `Mobile` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `covid_user`
+--
+
+INSERT INTO `covid_user` (`TestID`, `ClientName`, `Mobile`) VALUES
+(1, 'Parth', '7567731684'),
+(2, 'Parth', '7567731684'),
+(3, 'Vivek', '7568936547'),
+(4, 'Yogesh', '25896314785'),
+(5, 'Yatin', '7569847157'),
+(6, 'Rahul', '78523698'),
+(7, 'Ram', '789632145'),
+(8, 'Ramesh', '75677316894'),
+(9, 'Ankit', '7567731684'),
+(10, 'Ravi', '75698741125'),
+(11, 'Gautam', '7896541235'),
+(12, 'Mahendra', '7567731684'),
+(13, 'Ravi', '75698874123'),
+(14, 'Ravi', '243235435435'),
+(15, 'Yogesh', '7567731684'),
+(16, 'Yamil', '7567731684'),
+(17, 'Dhruv', '7567731684'),
+(18, 'Vishal', '7896541235'),
+(19, 'Vijay Sir', '7896541235'),
+(20, 'Vishal', '7896541235'),
+(21, 'Parth', '75698745'),
+(22, 'Vishal', '7896541235'),
+(23, 'Ravi', '78965412335'),
+(24, 'Ravi', '7896541235'),
+(25, 'Ravi', '7896541235'),
+(26, 'Ravi', '7896541235'),
+(27, 'Ravi', '7896541235'),
+(28, 'Parth', '7567731684'),
+(29, 'Pareth', '13243543546'),
+(30, 'Vishal', '7896541235'),
+(31, 'Ravi', '7896541235'),
+(32, 'Ravi', '7896541235'),
+(33, 'Parth', '7567731684'),
+(34, 'Ravi', '7896541235'),
+(35, 'vISHAL', '7896541235'),
+(36, 'pIYTUSH', '7896541235'),
+(37, 'pIYUSBG', '789654135'),
+(38, 'pIYTU', '234534564654'),
+(39, 'Rviu', '78965412'),
+(40, 'erwerf343', '54675786734'),
+(41, '435re', '345435634'),
+(42, 'Parth', '2343254365'),
+(43, 'fg345`5675', '57567'),
+(44, 'efrde', '4354356'),
+(45, 'Parth', '43543545'),
+(46, 'ewtrew', '34535435'),
+(47, '6657567', '5546456546'),
+(48, 'fg', '45646546'),
+(49, '5dfghdfg', '456546575'),
+(50, 'gf', '456546757'),
+(51, 'Parthg', '4235435646'),
+(52, 'sdfgvdg', '2343243');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `covid_user_ans`
+--
+
+CREATE TABLE `covid_user_ans` (
+  `AnsID` int(11) NOT NULL,
+  `TestID` int(11) NOT NULL,
+  `QuetionID` int(11) NOT NULL,
+  `Answer` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `covid_user_ans`
+--
+
+INSERT INTO `covid_user_ans` (`AnsID`, `TestID`, `QuetionID`, `Answer`) VALUES
+(1, 28, 1, 'Yes'),
+(2, 29, 1, 'Yes'),
+(3, 30, 1, 'Yes'),
+(4, 31, 1, 'Yes'),
+(5, 32, 1, 'Yes'),
+(6, 33, 1, 'Yes'),
+(7, 34, 1, 'Yes'),
+(8, 35, 1, 'Yes'),
+(9, 36, 1, 'Yes'),
+(10, 37, 1, 'Yes'),
+(11, 38, 1, 'Yes'),
+(12, 40, 1, 'Yes'),
+(13, 41, 1, 'Yes'),
+(14, 42, 1, 'Yes'),
+(15, 43, 1, 'Yes'),
+(16, 44, 1, 'Yes'),
+(17, 45, 1, 'Yes'),
+(18, 46, 1, 'Yes'),
+(19, 47, 1, 'Yes'),
+(20, 48, 1, 'Yes'),
+(21, 49, 1, 'Yes'),
+(22, 50, 1, 'Yes'),
+(23, 51, 1, 'Yes'),
+(24, 52, 1, 'Yes');
 
 -- --------------------------------------------------------
 
@@ -595,6 +708,40 @@ CREATE TABLE `mst_messagetemplate` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mst_question`
+--
+
+CREATE TABLE `mst_question` (
+  `QuetionID` int(11) NOT NULL,
+  `Quetion` varchar(800) NOT NULL,
+  `OptionType` int(11) NOT NULL COMMENT '0=mcq,1=Multiplechoice,2=NumberInput,3=date',
+  `Option` text NOT NULL,
+  `IsNested` tinyint(4) NOT NULL,
+  `NestedAns` varchar(100) NOT NULL,
+  `NestedID` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mst_question`
+--
+
+INSERT INTO `mst_question` (`QuetionID`, `Quetion`, `OptionType`, `Option`, `IsNested`, `NestedAns`, `NestedID`) VALUES
+(1, 'Have you or someone that you have contacted has traveled in the previous 14 days? ', 0, 'Yes,No', 0, '', ''),
+(2, 'Have you been in contact with someone who presented COVID19 symptoms?', 0, 'Yes,No', 0, '', ''),
+(3, 'Have you been in contact with someone who tested positive for COVID19?', 0, 'Yes,No', 0, '', ''),
+(4, 'Have you presented symptoms suggestive of COVID19?', 0, 'Yes,No', 1, 'Yes', '5'),
+(5, 'choose the symptoms that apply', 1, 'Fever,Cough,Shortness of breath or difficulty breathing,Tiredness,Chills,Muscular pain,Headaches,Sore throat,Runny nose,Diarrhea,Vomiting,Loss of taste or smell', 0, '', ''),
+(6, 'Have you been tested for COVID19?', 0, 'Yes,No', 1, 'Yes', '7'),
+(7, 'What were the results of the test?', 0, 'I tested positive,I tested negative', 1, 'I tested positive', '9'),
+(8, 'How many times have you been tested? ', 2, '', 0, '', ''),
+(9, 'the date for test:', 3, '', 0, '', ''),
+(10, 'How many of these tests were molecular?', 2, '', 0, '', ''),
+(11, 'How many of these tests were serological (Rapid tests)? ', 2, '', 0, '', ''),
+(12, 'Have you fully recovered and tested negative?', 0, 'Yes,No', 0, '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mst_state`
 --
 
@@ -673,6 +820,315 @@ CREATE TABLE `new_student` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `slot_booking`
+--
+
+CREATE TABLE `slot_booking` (
+  `SlotID` int(11) NOT NULL,
+  `ClientName` varchar(200) NOT NULL,
+  `Mobile` varchar(100) NOT NULL,
+  `Token` varchar(200) NOT NULL,
+  `AttendeeID` int(11) NOT NULL,
+  `SlotDate` date NOT NULL,
+  `SlotHour` int(11) NOT NULL,
+  `SlotMinute` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `slot_booking`
+--
+
+INSERT INTO `slot_booking` (`SlotID`, `ClientName`, `Mobile`, `Token`, `AttendeeID`, `SlotDate`, `SlotHour`, `SlotMinute`) VALUES
+(1, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 0),
+(2, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 0),
+(3, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 0),
+(4, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 5),
+(5, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 5),
+(6, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 5),
+(7, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 10),
+(8, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 10),
+(9, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 10),
+(10, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 15),
+(11, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 15),
+(12, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 15),
+(13, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 20),
+(14, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 20),
+(15, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 20),
+(16, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 25),
+(17, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 25),
+(18, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 25),
+(19, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 30),
+(20, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 30),
+(21, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 30),
+(22, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 35),
+(23, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 35),
+(24, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 35),
+(25, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 40),
+(26, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 40),
+(27, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 40),
+(28, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 45),
+(29, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 45),
+(30, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 45),
+(31, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 50),
+(32, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 50),
+(33, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 50),
+(34, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 9, 55),
+(35, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 9, 55),
+(36, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 9, 55),
+(37, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 10, 0),
+(38, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 10, 0),
+(39, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 10, 0),
+(40, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 10, 5),
+(41, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 10, 5),
+(42, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 10, 5),
+(43, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 10, 10),
+(44, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 10, 10),
+(45, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 10, 10),
+(46, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 10, 15),
+(47, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 10, 15),
+(48, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 10, 15),
+(49, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 10, 20),
+(50, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 10, 20),
+(51, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 10, 20),
+(52, 'Parth Devani', '7567731684', '7821147644791858a73f142598dc2a54', 1, '2021-08-07', 10, 25),
+(53, 'Parth Devani', '7567731684', '9f134c1771a88fc0388aab183d9df06c', 2, '2021-08-07', 10, 25),
+(54, 'Parth Devani', '7567731684', '8021dd5fb51935a4a564691c20b40ade', 3, '2021-08-07', 10, 25),
+(55, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 10, 30),
+(56, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 10, 30),
+(57, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 10, 30),
+(58, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 10, 35),
+(59, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 10, 35),
+(60, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 10, 35),
+(61, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 10, 40),
+(62, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 10, 40),
+(63, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 10, 40),
+(64, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 10, 45),
+(65, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 10, 45),
+(66, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 10, 45),
+(67, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 10, 50),
+(68, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 10, 50),
+(69, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 10, 50),
+(70, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 10, 55),
+(71, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 10, 55),
+(72, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 10, 55),
+(73, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 0),
+(74, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 0),
+(75, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 0),
+(76, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 5),
+(77, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 5),
+(78, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 5),
+(79, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 10),
+(80, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 10),
+(81, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 10),
+(82, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 15),
+(83, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 15),
+(84, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 15),
+(85, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 20),
+(86, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 20),
+(87, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 20),
+(88, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 25),
+(89, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 25),
+(90, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 25),
+(91, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 30),
+(92, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 30),
+(93, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 30),
+(94, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 35),
+(95, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 35),
+(96, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 35),
+(97, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 40),
+(98, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 40),
+(99, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 40),
+(100, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 45),
+(101, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 45),
+(102, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 45),
+(103, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 50),
+(104, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 50),
+(105, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 50),
+(106, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 11, 55),
+(107, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 11, 55),
+(108, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 11, 55),
+(109, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 0),
+(110, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 12, 0),
+(111, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 12, 0),
+(112, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 5),
+(113, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 12, 5),
+(114, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 12, 5),
+(115, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 10),
+(116, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 12, 10),
+(117, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 12, 10),
+(118, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 15),
+(119, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 12, 15),
+(120, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 12, 15),
+(121, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 20),
+(122, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 12, 20),
+(123, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 12, 20),
+(124, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 25),
+(125, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 12, 25),
+(126, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 12, 25),
+(127, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 30),
+(128, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 12, 30),
+(129, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 12, 30),
+(130, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 35),
+(131, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 12, 35),
+(132, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 12, 35),
+(133, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 40),
+(134, 'Parth Devani', '7567731684', '87ee8dc74952c0ab59f6b6663c46b1bb', 2, '2021-08-07', 12, 40),
+(135, 'Parth Devani', '7567731684', '7f8844994a27cccbca476599eb50f4cd', 3, '2021-08-07', 12, 40),
+(136, 'Parth Devani', '7567731684', 'f3ad7869e344dc9940e79107c7fecc4b', 1, '2021-08-07', 12, 45),
+(137, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 12, 45),
+(138, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 12, 45),
+(139, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 12, 50),
+(140, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 12, 50),
+(141, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 12, 50),
+(142, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 12, 55),
+(143, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 12, 55),
+(144, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 12, 55),
+(145, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 0),
+(146, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 0),
+(147, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 0),
+(148, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 5),
+(149, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 5),
+(150, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 5),
+(151, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 10),
+(152, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 10),
+(153, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 10),
+(154, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 15),
+(155, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 15),
+(156, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 15),
+(157, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 20),
+(158, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 20),
+(159, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 20),
+(160, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 25),
+(161, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 25),
+(162, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 25),
+(163, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 30),
+(164, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 30),
+(165, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 30),
+(166, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 35),
+(167, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 35),
+(168, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 35),
+(169, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 40),
+(170, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 40),
+(171, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 40),
+(172, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 45),
+(173, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 45),
+(174, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 45),
+(175, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 50),
+(176, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 50),
+(177, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 50),
+(178, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 14, 55),
+(179, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 14, 55),
+(180, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 14, 55),
+(181, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 0),
+(182, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 0),
+(183, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 0),
+(184, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 5),
+(185, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 5),
+(186, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 5),
+(187, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 10),
+(188, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 10),
+(189, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 10),
+(190, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 15),
+(191, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 15),
+(192, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 15),
+(193, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 20),
+(194, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 20),
+(195, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 20),
+(196, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 25),
+(197, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 25),
+(198, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 25),
+(199, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 30),
+(200, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 30),
+(201, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 30),
+(202, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 35),
+(203, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 35),
+(204, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 35),
+(205, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 40),
+(206, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 40),
+(207, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 40),
+(208, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 45),
+(209, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 45),
+(210, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 45),
+(211, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 50),
+(212, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 50),
+(213, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 50),
+(214, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 15, 55),
+(215, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 15, 55),
+(216, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 15, 55),
+(217, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 16, 0),
+(218, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 16, 0),
+(219, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 16, 0),
+(220, 'Parth Devani', '7567731684', '95266ebbe50b5f57e521700a16618762', 1, '2021-08-07', 16, 5),
+(221, 'Parth Devani', '7567731684', 'd9d016c6bdd11d7a398b845ff94b11f6', 2, '2021-08-07', 16, 5),
+(222, 'Parth Devani', '7567731684', 'ede50fe3efc49e3be499bf9a5e9cfe8f', 3, '2021-08-07', 16, 5),
+(223, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 10),
+(224, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 10),
+(225, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 10),
+(226, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 15),
+(227, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 15),
+(228, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 15),
+(229, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 20),
+(230, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 20),
+(231, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 20),
+(232, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 25),
+(233, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 25),
+(234, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 25),
+(235, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 30),
+(236, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 30),
+(237, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 30),
+(238, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 35),
+(239, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 35),
+(240, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 35),
+(241, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 40),
+(242, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 40),
+(243, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 40),
+(244, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 45),
+(245, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 45),
+(246, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 45),
+(247, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 50),
+(248, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 50),
+(249, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 50),
+(250, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 16, 55),
+(251, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 16, 55),
+(252, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 16, 55),
+(253, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 0),
+(254, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 0),
+(255, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 0),
+(256, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 5),
+(257, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 5),
+(258, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 5),
+(259, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 10),
+(260, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 10),
+(261, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 10),
+(262, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 15),
+(263, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 15),
+(264, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 15),
+(265, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 20),
+(266, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 20),
+(267, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 20),
+(268, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 25),
+(269, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 25),
+(270, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 25),
+(271, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 30),
+(272, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 30),
+(273, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 30),
+(274, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 35),
+(275, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 35),
+(276, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 35),
+(277, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 40),
+(278, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 40),
+(279, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 40),
+(280, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 45),
+(281, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 45),
+(282, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 45),
+(283, 'Parth Devani', '7567731684', '57ed9caf93f9a3f597b62322724006c8', 1, '2021-08-07', 17, 50),
+(284, 'Parth Devani', '7567731684', 'cd1067f420f24a7b228344f4bbee3ca6', 2, '2021-08-07', 17, 50),
+(285, 'Parth Devani', '7567731684', '073a0d7c09fd66b98be64fb79551bb5e', 3, '2021-08-07', 17, 50),
+(292, 'Vivek', '75698745214', '5ec96674ac0f46a7ce9a3340d0b7f239', 1, '2021-08-07', 17, 55);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `student`
 --
 
@@ -696,11 +1152,26 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`UserId`, `StudentName`, `Class`, `Age`, `Hobbies`, `Gender`, `State`, `City`, `Pincode`, `Photo`, `Location`) VALUES
 (3, 'Abas', '2nd', '25', 'Coding,Designing', 'Male', 4030, 148859, '394101', 'Images/image_7f1eced8-e878-4a01-8284-772415512d70.png', '204-A jaimini'),
-(5, 'Parth', '1st', '24', 'Coding', 'Male', 4007, 57585, '254852', 'Images/image_355b11be-0f40-4df0-992f-24ba94224b5e.png', '204-A');
+(5, 'Parth', '1st', '24', 'Coding', 'Male', 4007, 57585, '254852', 'Images/image_355b11be-0f40-4df0-992f-24ba94224b5e.png', '204-A'),
+(6, 'Shari Hari', '1st', '11', 'Coding,Designing', 'Male', 4030, 57584, '341011', 'Images/image_b5df39a0-e40d-4f67-8072-f41e6bd5814e.png', 'new Akshardham');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `covid_user`
+--
+ALTER TABLE `covid_user`
+  ADD PRIMARY KEY (`TestID`);
+
+--
+-- Indexes for table `covid_user_ans`
+--
+ALTER TABLE `covid_user_ans`
+  ADD PRIMARY KEY (`AnsID`),
+  ADD KEY `TestID` (`TestID`),
+  ADD KEY `QuetionID` (`QuetionID`);
 
 --
 -- Indexes for table `hst_student_login`
@@ -721,6 +1192,12 @@ ALTER TABLE `mst_messagetemplate`
   ADD PRIMARY KEY (`TemplateID`);
 
 --
+-- Indexes for table `mst_question`
+--
+ALTER TABLE `mst_question`
+  ADD PRIMARY KEY (`QuetionID`);
+
+--
 -- Indexes for table `mst_state`
 --
 ALTER TABLE `mst_state`
@@ -734,6 +1211,12 @@ ALTER TABLE `new_student`
   ADD PRIMARY KEY (`UserId`);
 
 --
+-- Indexes for table `slot_booking`
+--
+ALTER TABLE `slot_booking`
+  ADD PRIMARY KEY (`SlotID`);
+
+--
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
@@ -742,6 +1225,18 @@ ALTER TABLE `student`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `covid_user`
+--
+ALTER TABLE `covid_user`
+  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `covid_user_ans`
+--
+ALTER TABLE `covid_user_ans`
+  MODIFY `AnsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `mst_city`
@@ -756,6 +1251,12 @@ ALTER TABLE `mst_messagetemplate`
   MODIFY `TemplateID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `mst_question`
+--
+ALTER TABLE `mst_question`
+  MODIFY `QuetionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `mst_state`
 --
 ALTER TABLE `mst_state`
@@ -768,10 +1269,16 @@ ALTER TABLE `new_student`
   MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `slot_booking`
+--
+ALTER TABLE `slot_booking`
+  MODIFY `SlotID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
+
+--
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
