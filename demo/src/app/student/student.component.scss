@@ -1,0 +1,210 @@
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+.header_top{width: 100%;
+    display: inline-block;
+    background-color: #a7bae4;
+    color: #fff;padding: 10px 15px;
+    .right_top_btn{
+        a{
+            width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #000;
+    display: inline-block;
+    text-align: center;
+    border-radius: 100%;
+    color: #fff;
+    margin-right: 15px;
+    &:last-child{margin-right: 0px;}
+        }
+    }
+}
+
+
+//@at-root
+
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+.signup-heading {
+    h2 {
+        color: #19274b;
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 15px 0;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #f0f0f0;
+        @media (max-width: 991px) {
+            font-size: 20px;
+        }
+        @media (max-width: 767px) {
+            font-size: 18px;
+        }
+    }
+}
+
+.backto-home-btn {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    z-index: 1;
+    .btn {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    @media (max-width: 767px) {
+        position: relative;
+        left: 6px;
+        top: 0;        
+    }
+}
+
+.form-control {
+    padding: 12px 15px 12px 15px;
+    color: #19274b;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.form-label {
+    color: #66728a;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+    @media (max-width: 767px) {
+        font-size: 13px;
+    }
+}
+
+.required-field-star {
+    color: #ff0000;
+}
+
+.lgn-frgt-btn {
+    padding: 11px 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+.signup-left-image {
+    height: 100%;
+    // background: url(../../assets/images/login-left-image.png);
+    background-size: cover;
+    background-position: center;
+    img {
+        object-fit: cover;
+    }
+    @media (max-width: 767px) {
+        position: fixed;
+        height: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        opacity: 0.1;
+    }
+}
+
+.lgn-fgt-signup-btm {
+    color: #969696;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    a {
+        color: #991e21;
+        font-size: 14px;
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+    }
+}
+
+.form-group{width: 100%;display: inline-block;margin-bottom: 20px;}
+
+.t_img img{width: 100px;height: 50px;}
+
+::ng-deep {
+    .ng-dropdown-panel {
+        z-index: 1080 !important;
+    }
+    // .ng-select.ng-select-single .ng-select-container {
+    //     height: 50px !important;
+    // }
+    // .ng-select, .ng-select span {
+    //     box-sizing: border-box;
+    //     width: 313.25px;
+    // }
+    // .ng-select {
+    //     cursor: pointer;
+    // }
+    // .ng-select.ng-select-single .ng-select-container .ng-value-container, .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+       
+    //     cursor: pointer;
+    // }
+    .ng-select.ng-select-single .ng-select-container {
+        height: 50px;
+        cursor: pointer;
+    }
+    .ng-dropdown-panel.ng-select-top, .ng-dropdown-panel.ng-select-bottom {
+        width: 310px;
+    }
+    .datepicker{
+        position: relative;
+    }
+    .ng-select .ng-clear-wrapper {
+        display: none;
+    }
+    .ng-select .ng-select-container .ng-value-container {
+        padding-left: 4px;
+    }
+    .ng-select .ng-select-container {
+        border-color: #e6e6e6;
+    }
+    .datepicker .form-right-icn {
+        position: absolute;
+        top: 70%;
+        right: 12px;
+        font-size: 20px;
+        transform: translateY(-80%);
+        color: #19274b;
+        z-index: 1;
+    }
+    .dp-picker-input{
+        padding: 12px 15px 12px 15px;
+        color: #19274b;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        display: block;
+        width: 100%;
+        font-size: 1rem;
+        line-height: 1.5;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #e6e6e6;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        height: auto !important;
+    }
+    .is-invalid{
+        border-color: #dc3545 !important;
+    }
+    .ng-select.is-invalid .ng-select-container, .Datevalidation.is-invalid .dp-picker-input{
+        border-color: #dc3545 !important;
+    }
+    dp-date-picker.dp-material .dp-picker-input {
+        height: 47px !important;
+    }
+    
+}
+

@@ -1,0 +1,114 @@
+.datatable-custom-wrapper {    
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    table {
+        thead {
+            tr {
+                th {
+                    background: #e0edf8;
+                    color: #4a5f70;
+                    text-transform: capitalize;
+                    font-size: 13px;
+                    padding: 9px 15px 9px 15px;
+                    border-right: 0 solid #e0e3ef;
+                    border-bottom: 1px solid #e0e3ef;
+                    border-right: 1px solid #e0e3ef;
+                    white-space: nowrap;
+                    text-align: center;
+                    font-weight: 600;
+                    letter-spacing: 0.3px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    color: #0a528c;
+                    font-weight: 600;
+                    border-right: 0 solid #e0e3ef;
+                    border-bottom: 1px solid #e0e3ef;
+                    border-right: 1px solid #e0e3ef;
+                    border-top: 0 solid #e0e3ef !important;
+                    text-align: center;
+                    padding: 3px 15px;
+                    height: 30px;
+                    white-space: nowrap;
+                    font-size: 12px;
+                    .tbl-discription-cel {
+                        white-space: normal;
+                        width: 300px;
+                    }
+                }
+            }
+        }
+        &.dataTable {
+            &.no-footer {
+                border-bottom: 0;
+            }
+        }
+    }
+}
+
+.tbl-status-main {
+    padding: 2px 10px;
+    border-radius: 50px;
+    display: inline-block;
+    &.tbl-status-active {
+        background: #00b075;
+        color: #fff;
+    }
+    &.tbl-status-deactive {
+        background: #981b1f;
+        color: #fff;
+    }
+    &.tbl-status-requested {
+        background: #e18a00;
+        color: #fff;
+    }
+}
+
+ul.action-col-wrapper {
+    li {
+        button {
+            margin: 0 1px;
+            border-radius: 50px;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            border: 0;
+            outline: none;
+            background: transparent;
+            &::before {
+                content: '';
+                position: absolute;
+                background: #f3efeb;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 0;
+                border-radius: 50px;
+                transform: scale(0.7);
+                transition: all 0.3s;
+                opacity: 0;
+                visibility: hidden;
+            }
+            &:hover::before,
+            &:focus::before {
+                transform: scale(1);
+                opacity: 1;
+                visibility: visible;
+            }
+            .action-col-icon {
+                width: 17px;
+                position: relative;
+                z-index: 1;
+            }
+        }
+    }
+}

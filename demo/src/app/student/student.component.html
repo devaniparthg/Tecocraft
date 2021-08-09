@@ -1,0 +1,220 @@
+<app-confirm-dialog></app-confirm-dialog>
+<div class="header_top">
+  <div class="container mt-0">
+    <div class="row align-items-center">
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-4 text-center">
+        <h3>Crud Opration</h3>
+      </div>
+      <div class="col-md-4 text-end">
+        <div class="right_top_btn">
+          <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#adddata" (click)="newStudent();"><i
+              class="fas fa-plus"></i></a>
+          <a href="javascript:void(0);" data-bs-toggle="offcanvas" data-bs-target="#filterdata"
+            aria-controls="filterdata"><i class="fas fa-filter"></i></a>
+          <a href="javascript:void(0);" (click)="Export();"><i class="fas fa-file-export"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-12">
+  <div class="datatable-custom-wrapper mt-1 datatable-height-fit-screen">
+    <table datatable [dtOptions]="dtOptions" class="datatable-columns-adjust w-100">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Class</th>
+          <th>Age</th>
+          <th>Hobbies</th>
+          <th>Gender</th>
+          <th>Photo</th>
+          <th>Location</th>
+          <th>Pincode</th>
+          <th>State Name</th>
+          <th>City Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of StudentList.List;let i=index">
+          <td>
+            <div class="row">
+              <div class="col-sm">
+                <i class="fas fa-edit" (click)="edit(i)" style="margin: 14px;"></i>
+                <i class="fa fa-trash" (click)="delete(item.UserId)" aria-hidden="true"></i>
+              </div>
+            </div>
+          </td>
+          <td>{{item.UserId || "-"}}</td>
+          <td>{{item.Name || "-"}}</td>
+          <td>{{item.Class || "-"}}</td>
+          <td>{{item.Age || "-"}}</td>
+          <td>{{item.Hobbie || "-"}}</td>
+          <td>{{item.Gender || "-"}}</td>
+          <td>
+            <div class="t_img">
+              <img [src]="IMAGEURL+item.Photo" height="20px" class="w-100" alt="">
+            </div>
+          </td>
+          <td>{{item.Location || "-"}}</td>
+          <td>{{item.Pincode || "-"}}</td>
+          <td>{{item.StateName || "-"}}</td>
+          <td>{{item.CityName || "-"}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- Add Data Modal -->
+<div class="modal fade adddata" id="adddata" tabindex="-1" aria-labelledby="adddatal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="adddatal">Student Upload</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form #SignUpForm="ngForm" (ngSubmit)="SignUpForm.form.valid && userRegistration(SignUpForm)">
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="hidden" #UserId="ngModel" [(ngModel)]="UserInfo.UserId" name="UserId">
+            <label class="form-label ps-2">Name<span class="required-field-star">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter your name" name="Name"
+              [(ngModel)]="UserInfo.Name" #Name="ngModel"
+              [ngClass]="{ 'is-invalid': SignUpForm.submitted && Name.invalid }" required>
+            <span class="text-danger" *ngIf="SignUpForm.submitted && Name.invalid">Please enter name.</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label ps-2">Address <span class="required-field-star">*</span></label>
+            <input type="text" class="form-control" maxlength="100" placeholder="Enter your  location" name="Location"
+              [(ngModel)]="UserInfo.Location" #Location="ngModel"
+              [ngClass]="{ 'is-invalid': SignUpForm.submitted && Location.invalid }" required>
+            <span class="text-danger" *ngIf="SignUpForm.submitted && Location.invalid">Please enter location.</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label ps-2">Class <span class="required-field-star">*</span></label>
+            <ng-select [items]="Class1" [dropdownPosition]="'bottom'" [searchable]="false" [clearable]="false"
+              bindLabel="name" bindValue="id" appendTo="body" placeholder="Option" name="Class"
+              [(ngModel)]="UserInfo.Class" #Class="ngModel"
+              [ngClass]="{ 'is-invalid': SignUpForm.submitted && Class.invalid }" required>
+            </ng-select>
+            <span class="text-danger" *ngIf="SignUpForm.submitted && Class.invalid">Please select Class.</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label ps-2">Gender <span class="required-field-star">*</span></label>
+            <ng-select [items]="Gender1" [dropdownPosition]="'bottom'" [searchable]="false" [clearable]="false"
+              bindLabel="name" bindValue="id" appendTo="body" placeholder="Option" name="Gender"
+              [(ngModel)]="UserInfo.Gender" #Gender="ngModel"
+              [ngClass]="{ 'is-invalid': SignUpForm.submitted && Gender.invalid }" required>
+            </ng-select>
+            <span class="text-danger" *ngIf="SignUpForm.submitted && Gender.invalid">Please select Gender.</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label ps-2">Age<span class="required-field-star">*</span></label>
+            <input type="number" class="form-control" placeholder="Enter your Age" name="Age" [(ngModel)]="UserInfo.Age"
+              #Age="ngModel" [ngClass]="{ 'is-invalid': SignUpForm.submitted && Age.invalid }" required>
+            <span class="text-danger" *ngIf="SignUpForm.submitted && Age.invalid">Please enter Age.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label ps-2">Hobbies<span class="required-field-star">*</span></label>
+            <div class="form-control">
+              <div class="form-check form-check-inline " *ngFor="let item of Hobbies;let i=index">
+                <input style="margin: 10px;" type="checkbox" name="{{item.name}}" [checked]="item.isChecked"
+                  [(ngModel)]="UserInfo.Hobbies[i]">
+                <label class="form-check-label ">{{item.name}}</label>
+              </div>
+            </div>
+            <span class="text-danger" *ngIf="SignUpForm.submitted && !UserInfo.Hobbies.includes(true)">Please select
+              Hobbies.</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label ps-2">State <span class="required-field-star">*</span></label>
+            <div class="ng-select-lg ng-select-sm ">
+              <ng-select [items]="StateList" (change)="GetCity($event)" [dropdownPosition]="'bottom'"
+                [searchable]="true" [clearable]="false" bindLabel="name" bindValue="id" appendTo="body"
+                placeholder="Option" name="State" [(ngModel)]="UserInfo.State" #State="ngModel"
+                [ngClass]="{ 'is-invalid': SignUpForm.submitted && State.invalid }" required>
+              </ng-select>
+              <span class="text-danger" *ngIf="SignUpForm.submitted && State.invalid">Please select State.</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label ps-2">City <span class="required-field-star">*</span></label>
+            <div class="ng-select-lg ng-select-sm ">
+              <ng-select [items]="CityList" [dropdownPosition]="'bottom'" [searchable]="true" [clearable]="false"
+                bindLabel="name" bindValue="id" appendTo="body" placeholder="Option" name="City"
+                [(ngModel)]="UserInfo.City" #City="ngModel"
+                [ngClass]="{ 'is-invalid': SignUpForm.submitted && City.invalid }" required>
+              </ng-select>
+              <span class="text-danger" *ngIf="SignUpForm.submitted && City.invalid">Please select City.</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label ps-2">Pincode<span class="required-field-star">*</span></label>
+            <input type="text" class="form-control" maxlength="6" placeholder="Enter your Pincode" name="Pincode"
+              [(ngModel)]="UserInfo.Pincode" #Pincode="ngModel"
+              [ngClass]="{ 'is-invalid': SignUpForm.submitted && Pincode.invalid }" required>
+            <span class="text-danger" *ngIf="SignUpForm.submitted && Pincode.invalid">Please enter Pincode.</span>
+          </div>
+
+          <div class="form-group">
+            <input type="hidden" #oldfile="ngModel" [(ngModel)]="UserInfo.oldfile" name="oldfile">
+            <label class="form-label ps-2">Photo<span class="required-field-star">*</span></label>
+            <input type="file" name="fileContent" class="form-control" (change)="handleFileInput($event)"
+              id="profilephoto" #fileContent required />
+            <span class="text-danger" *ngIf="SignUpForm.submitted && fileContent.oninvalid">Please upload file.</span>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Filter Data Modal -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="filterdata" aria-labelledby="filterdataLabel">
+  <div class="offcanvas-header">
+    <h5 id="filterdataLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form #FilterForm="ngForm" (ngSubmit)="FilterForm.form.valid && userFilter(FilterForm)">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group form-group-cust">
+            <label>Search</label>
+            <input type="text" class="form-control" placeholder="Search here"
+              name="Search"
+              [(ngModel)]="FilterData.Search" #Search="ngModel">
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group form-group-cust">
+            <label>Sorting BY</label>
+            <ng-select [items]="Sorting" [dropdownPosition]="'bottom'" [searchable]="true" [clearable]="false"
+                bindLabel="name" bindValue="id" appendTo="body" placeholder="Option" name="Sorting"
+                [(ngModel)]="FilterData.Sorting">
+              </ng-select>
+          </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
