@@ -64,3 +64,36 @@ exports.UserDelete = (req, res) => {
         }
     });
 };
+
+exports.CovidQueList = (req, res) => {
+    User.CovidQueList(req.body, (error, data) => {
+        if (error!=null && error.sqlMessage!=undefined) {
+            console.log(error);
+            res.status(200).send(Common.ResFormat('0', process.env.Toaster, 'Sorry, something went wrong; please check your internet connection or try again later.', '', {}));
+        } else {
+            res.status(200).send(Common.ResFormat(data.status, process.env.Toaster, data.message, data.token, data.data));
+        }
+    });
+};
+
+exports.CovidTestEntry = (req, res) => {
+    User.CovidTestEntry(req.body, (error, data) => {
+        if (error!=null && error.sqlMessage!=undefined) {
+            console.log(error);
+            res.status(200).send(Common.ResFormat('0', process.env.Toaster, 'Sorry, something went wrong; please check your internet connection or try again later.', '', {}));
+        } else {
+            res.status(200).send(Common.ResFormat(data.status, process.env.Toaster, data.message, data.token, data.data));
+        }
+    });
+};
+
+exports.CovidAnsEntry = (req, res) => {
+    User.CovidAnsEntry(req.body, (error, data) => {
+        if (error!=null && error.sqlMessage!=undefined) {
+            console.log(error);
+            res.status(200).send(Common.ResFormat('0', process.env.Toaster, 'Sorry, something went wrong; please check your internet connection or try again later.', '', {}));
+        } else {
+            res.status(200).send(Common.ResFormat(data.status, process.env.Toaster, data.message, data.token, data.data));
+        }
+    });
+};

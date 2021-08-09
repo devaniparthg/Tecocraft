@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Covid Registration</h3>
+      <form #SignUpForm="ngForm" (ngSubmit)="SignUpForm.form.valid && userRegistration(SignUpForm)">
+        <div class="form-group p-2">
+          <input class="form-control" type="text" #name="ngModel" [ngModel]="ClientName" name="ClientName"
+            [ngClass]="{ 'is-invalid': SignUpForm.submitted && name.invalid }" placeholder="Enter name"
+            [readonly]="UserID!=0?true:false" required>
+          <span class="text-danger" *ngIf="SignUpForm.submitted && name.invalid">Please enter name.</span>
+        </div>
+        <div class="form-group p-2">
+          <input class="form-control" type="number" min="10" #mobile="ngModel" [ngModel]="MobileNo"
+            [readonly]="UserID!=0?true:false" name="MobileNo"
+            [ngClass]="{ 'is-invalid': SignUpForm.submitted && mobile.invalid }" class="form-control"
+            placeholder="mobile" required>
+          <span class="text-danger" *ngIf="SignUpForm.submitted && mobile.invalid"> Please enter at mobile.</span>
+        </div>
+        <button class="btn btn-primary p-2 form-control" type="submit" [disabled]="UserID!=0?true:false">SUBMIT</button>
+      </form>
+    </div>
+    <div class="col-md-8" [ngStyle]="{'display': UserID!=0 ? 'block' : 'none'}">
+      <h3>Self Assess</h3>
+      <div class="container mt-5" [ngStyle]="{'display': IsExamEnd ? 'none' : 'block'}">
+        <div class="d-flex justify-content-center row">
+          <div class="col-md-10 col-lg-10">
+            <div class="border">
+              <div class="question bg-white p-3 border-bottom">
+                <div class="d-flex flex-row justify-content-between align-items-center mcq"
+                  [ngSwitch]="SingleQuestion.OptionType">
+                  <h4 *ngSwitchCase="0">MCQ</h4>
+                  <h4 *ngSwitchCase="1">Multi Select</h4>
+                  <h4 *ngSwitchCase="2">Insert Number</h4>
+                  <h4 *ngSwitchCase="3">Date select</h4>
+                  <h4 *ngSwitchDefault>Default Question</h4>
+                  <span>({{SingleQuestion.QuetionNo}} of {{SingleQuestion.Total}})</span>
+                </div>
+              </div>
+              <form #QuestionAns="ngForm" (ngSubmit)="QuestionAns.form.valid && nextQuetion(QuestionAns)">
+                <div class="question bg-white p-3 border-bottom">
+                  <div class="d-flex flex-row align-items-center question-title">
+                    <h3 class="text-danger">Q.</h3>
+                    <h5 class="mt-1 ml-2">{{SingleQuestion.Quetion}}</h5>
+                    <input type="hidden" #TestID="ngModel" [ngModel]="UserID" name="TestID">
+                    <input type="hidden" #QuetionID="ngModel" [ngModel]="SingleQuestion.QuetionID" name="QuetionID">
+                    <input type="hidden" #QuetionNo="ngModel" [ngModel]="SingleQuestion.QuetionNo" name="QuetionNo">
+                    <input type="hidden" #Quetion="ngModel" [ngModel]="SingleQuestion.Quetion" name="Quetion">
+                  </div>
+                  <div class="ans ml-2" *ngFor="let item of SingleQuestion.OptionArray">
+                    <label class="radio">
+                        <input type="radio" name="Answer" value="{{item}}" ngModel  required> <span>{{item}}</span>
+                    </label>
+                  </div>
+                  <span class="text-danger" *ngIf="QuestionAns.submitted && !QuestionAns.form.valid">Please select answer.</span>
+                </div>
+                <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
+                  <!-- <button class="btn btn-primary d-flex align-items-center btn-danger" type="button">
+                    <i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button> -->
+                  <button
+                    class="btn btn-primary border-success align-items-center btn-success" type="submit">Next<i
+                      class="fa fa-angle-right ml-2"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="datatable-custom-wrapper mt-1 datatable-height-fit-screen" [ngStyle]="{'display': IsExamEnd ? 'block' : 'none'}">
+        <table datatable [dtOptions]="dtOptions" class="datatable-columns-adjust w-100">
+          <thead>
+            <tr>
+              <th style="width:10%">Qestion No.</th>
+              <th style="width:70%">Quetion</th>
+              <th style="width:20%">Answer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of AnswerList;let i=index">
+              <td>{{item.QuetionNo || "-"}}</td>
+              <td>{{item.Quetion || "-"}}</td>
+              <td>{{item.Answer || "-"}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

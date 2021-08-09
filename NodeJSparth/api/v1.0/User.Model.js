@@ -226,6 +226,8 @@ User.GetCity = async (request, callback) => {
 }
 
 
+
+
 User.UserDelete = async (request, callback) => {
     var response = {
         'status': 1,
@@ -247,6 +249,123 @@ User.UserDelete = async (request, callback) => {
 
     callback(null, json_response(response));
 }
+
+
+User.CovidQueList = async (request, callback) => {
+    let where = '';
+    let where_array = [];
+    
+
+    let total_query = 'SELECT COUNT(tb.QuetionID) AS total FROM (SELECT Que.QuetionID \
+        FROM mst_question AS Que \
+        WHERE  1 ' + where + ') AS tb';
+    let total_record = await sqlhelper.select(total_query, where_array, (err, res) => {
+        if (err || _.size(res) <= 0) {
+            console.log(err);
+            return 0;
+        } else {
+            return res[0]['total'];
+        }
+    });
+
+    var response = {
+        'status': 0,
+        'message': '',
+        'data': {'List': []}
+    };
+
+    if (total_record == 0) {
+        response['status'] = 200;
+        response['message'] = 'Data is not found';
+        let resp = {
+            'List': [],
+        }
+        response['data'] = resp;
+    } else {
+        response['status'] = 200;
+        response['message'] = 'Successfully get data';
+
+        let list_query = 'SELECT `QuetionID`, `Quetion`, `OptionType`, `Option`, `IsNested`, `NestedAns`, `NestedID` \
+                                FROM mst_question  \
+                          WHERE 1 ' + where;
+        let list_data = await sqlhelper.select(list_query, where_array, (err, res) => {
+            if (err || _.size(res) <= 0) {
+                console.log(err);
+                return 0;
+            } else {
+                return json_response(res);
+            }
+        });
+
+        let resp = {
+            'List': list_data
+        }
+
+        response['data'] = resp;
+    }
+
+    callback(null, json_response(response));
+}
+
+User.CovidTestEntry = async (request, callback) => {
+
+    var response = {
+        'data': {'ID':0},
+        'message': 'Dear, user your registration process has been succeeded.',
+        'status': '1',
+        'token': request.Token,
+    };
+
+
+    var insert_data = {
+        'ClientName': request.ClientName,
+        'Mobile': request.MobileNo,
+    };
+    let user_data = await sqlhelper.insert('covid_user', insert_data, (err, res) => {
+        if (err) {
+            callback(json_response(err), null);
+            return 0;
+        } else {
+            res = json_response(res);
+            return res.insertId
+        }
+    });
+
+    response.data.ID=user_data;
+    
+    return callback(null, json_response(response));
+}
+
+User.CovidAnsEntry = async (request, callback) => {
+
+    var response = {
+        'data': {'ID':0},
+        'message': 'Dear, user your exam answer has been submitted.',
+        'status': '1',
+        'token': request.Token,
+    };
+
+
+    var insert_data = {
+        'TestID': request.TestID,
+        'QuetionID': request.QuetionID,
+        'Answer': request.Answer,
+    };
+    let user_data = await sqlhelper.insert('covid_user_ans', insert_data, (err, res) => {
+        if (err) {
+            callback(json_response(err), null);
+            return 0;
+        } else {
+            res = json_response(res);
+            return res.insertId
+        }
+    });
+
+    response.data.ID=user_data;
+    
+    return callback(null, json_response(response));
+}
+
 
 
 json_response = (data) => {

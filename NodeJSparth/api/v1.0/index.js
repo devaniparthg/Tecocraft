@@ -14,4 +14,8 @@ router.post('/UserList',  User.UserList);
 router.post('/GetState',  User.GetState);
 router.post('/GetCity',  User.GetCity);
 
+router.post('/CovidQueList',  User.CovidQueList);
+router.post('/CovidTestEntry',  User.CovidTestEntry);
+router.post('/CovidAnsEntry',  User.CovidAnsEntry);
+
 module.exports = router;

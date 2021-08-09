@@ -24,6 +24,38 @@ export class PageDetails{
     CurrentPage: number = 0;
 }
 
+export class QuestionList{
+    QuetionID:string='';
+    Quetion:string='';
+    OptionType:number=0;
+    Option:string='';
+    IsNested:number=0;
+    NestedAns:string='';
+    NestedID:string='';
+}
+
+export class SingleQuestion{
+    QuetionID:string='';
+    QuetionNo:number=0;
+    Total:number=0;
+    Quetion:string='';
+    OptionType:number=0;
+    Option:string='';
+    OptionArray:any[] = new Array;
+    IsNested:number=0;
+    NestedAns:string='';
+    NestedID:string='';
+}
+
+export class AnswerList{
+    QuetionID:number=0;
+    Quetion:string='';
+    AnswerID:number=0;
+    QuetionNo:number=0;
+    TestID:number=0;
+    Answer:string='';
+}
+
 
 export class List{
     UserId:number=0;
