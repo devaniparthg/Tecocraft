@@ -79,16 +79,13 @@ export class CovidtestComponent implements OnInit {
       Question.resetForm();
       userData['AnswerID']=response.data.ID;
       this.AnswerList.push(userData);
-      let SingleQuestion:any=this.QueList[(userData.QuetionNo-1)];
-      console.log('checking');
-      console.log(SingleQuestion.IsNested);
-      console.log(userData.Answer);
-      console.log(SingleQuestion.NestedAns);
-      if((SingleQuestion.IsNested==1 && SingleQuestion.NestedAns==userData.Answer) || SingleQuestion.IsNested==0){
-        SingleQuestion['QuetionNo']=(userData.QuetionNo+1);
-        SingleQuestion['Total']=this.QueList.length;
-        SingleQuestion['OptionArray']=SingleQuestion.Option.split(',');
-        this.SingleQuestion=SingleQuestion;
+      let SingleQuestionTemp:any=this.QueList[userData.QuetionNo];
+      let checkTemp:any=this.QueList[userData.QuetionNo-1];
+      if((checkTemp.IsNested==1 && checkTemp.NestedAns==userData.Answer) || checkTemp.IsNested==0){
+        SingleQuestionTemp['QuetionNo']=(userData.QuetionNo+1);
+        SingleQuestionTemp['Total']=this.QueList.length;
+        SingleQuestionTemp['OptionArray']=SingleQuestionTemp.Option.split(',');
+        this.SingleQuestion=SingleQuestionTemp;
       }else{
         this.IsExamEnd=true;
         this.LoadData();
