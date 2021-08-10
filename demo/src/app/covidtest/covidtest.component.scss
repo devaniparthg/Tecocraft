@@ -92,7 +92,15 @@ label.radio input:checked+span {
     border-color: red;
     background-color: red;
     color: #fff
-}
+  }
+  .dataTables_empty
+  {
+    display: none !important;
+  }
+
+  #DataTables_Table_0_info,#DataTables_Table_0_paginate {
+    display: none !important;
+  }
 }
 
 .ans {

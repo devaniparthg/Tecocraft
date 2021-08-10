@@ -71,10 +71,19 @@ export class CovidtestComponent implements OnInit {
 
   nextQuetion(Question:NgForm){
     let userData:any=Question.value;
+
+    if(this.SingleQuestion.OptionType==3){
+      let Answer=[];
+      for (let index = 0; index < this.SingleQuestion.OptionArray.length; index++) {
+        const element = userData['date-'+index];
+        Answer.push(element);
+      }
+      userData['Answer']=Answer.join();
+    }
+    userData['TestID']=this.UserID;
     this.ApiService.CallApiService('CovidAnsEntry',userData).pipe(first()).subscribe(resp => { 
       let response = resp;
-      this.AnswerID.push(response.data.ID)
-      // this.UserID=response.data.ID;
+      this.AnswerID.push(response.data.ID);
       this.alert.showAlerts(response.message,'success');
       Question.resetForm();
       userData['AnswerID']=response.data.ID;
@@ -84,7 +93,11 @@ export class CovidtestComponent implements OnInit {
       if((checkTemp.IsNested==1 && checkTemp.NestedAns==userData.Answer) || checkTemp.IsNested==0){
         SingleQuestionTemp['QuetionNo']=(userData.QuetionNo+1);
         SingleQuestionTemp['Total']=this.QueList.length;
-        SingleQuestionTemp['OptionArray']=SingleQuestionTemp.Option.split(',');
+        if(SingleQuestionTemp['OptionType']!=3){
+          SingleQuestionTemp['OptionArray']=SingleQuestionTemp.Option.split(',');
+        }else{
+          SingleQuestionTemp['OptionArray']=[...Array(userData['Answer']).keys()];
+        }
         this.SingleQuestion=SingleQuestionTemp;
       }else{
         this.IsExamEnd=true;
@@ -93,9 +106,25 @@ export class CovidtestComponent implements OnInit {
     });
   }
 
+  Submit(Question:NgForm){
+    let userData:any=Question.value;
+    userData['TestID']=this.UserID;
+    this.ApiService.CallApiService('CovidAnsEntry',userData).pipe(first()).subscribe(resp => { 
+      let response = resp;
+      this.AnswerID.push(response.data.ID);
+      this.alert.showAlerts(response.message,'success');
+      Question.resetForm();
+      userData['AnswerID']=response.data.ID;
+      this.AnswerList.push(userData);
+      this.IsExamEnd=true;
+      this.LoadData();
+      
+    });
+  }
 
   LoadData(){
     let tabledata=this.AnswerList;
+
     this.dtOptions = {
       destroy: true,
       pagingType: 'simple_numbers',
@@ -117,7 +146,7 @@ export class CovidtestComponent implements OnInit {
       ordering: false,
       searching: false,
       
-      ajax: (tabledata: any, callback) => {
+      ajax: (dataTablesParameters: any, callback) => {
 
         
         // this.ApiService.CallApiService('GetTokenList',this.FilterData).pipe(first()).subscribe(
@@ -128,11 +157,7 @@ export class CovidtestComponent implements OnInit {
             recordsFiltered: tabledata.length,
             data: []
           });
-          if(tabledata.length==0){
-            $(".dataTables_empty").css("display", "none");
-          }else{
-            $(".dataTables_empty").css("display", "block");
-          }
+          
             
         // },
         // error => {
@@ -141,6 +166,8 @@ export class CovidtestComponent implements OnInit {
         // });
       },
     };
+
+   
   }
 
   Datatable(){

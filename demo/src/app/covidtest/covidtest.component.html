@@ -41,7 +41,6 @@
                   <div class="d-flex flex-row align-items-center question-title">
                     <h3 class="text-danger">Q.</h3>
                     <h5 class="mt-1 ml-2">{{SingleQuestion.Quetion}}</h5>
-                    <input type="hidden" #TestID="ngModel" [ngModel]="UserID" name="TestID">
                     <input type="hidden" #QuetionID="ngModel" [ngModel]="SingleQuestion.QuetionID" name="QuetionID">
                     <input type="hidden" #QuetionNo="ngModel" [ngModel]="SingleQuestion.QuetionNo" name="QuetionNo">
                     <input type="hidden" #Quetion="ngModel" [ngModel]="SingleQuestion.Quetion" name="Quetion">
@@ -50,6 +49,11 @@
                     <div class="ans ml-2" >
                         <input type="number" name="Answer"  ngModel  required> 
                     </div>
+                 </ng-container>
+                 <ng-container *ngSwitchCase="3">
+                  <div class="ans ml-2" *ngFor="let item of SingleQuestion.OptionArray;let i=index;">
+                      <input type="date" name="date-{{i}}"  ngModel  required> 
+                  </div>
                  </ng-container>
                  <ng-container *ngSwitchDefault>
                     <div class="ans ml-2" *ngFor="let item of SingleQuestion.OptionArray" >
@@ -61,12 +65,13 @@
                  </ng-container>
                   <span class="text-danger" *ngIf="QuestionAns.submitted && !QuestionAns.form.valid">Please select answer.</span>
                 </div>
-                <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
+                <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white" [ngSwitch]="SingleQuestion.QuetionNo">
                   <!-- <button class="btn btn-primary d-flex align-items-center btn-danger" type="button">
                     <i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button> -->
-                  <button
-                    class="btn btn-primary border-success align-items-center btn-success" type="submit">Next<i
+                  <button class="btn btn-primary border-success align-items-center btn-success" *ngSwitchCase="SingleQuestion.Total" (click)="Submit(QuestionAns)" type="button">Submit<i
                       class="fa fa-angle-right ml-2"></i></button>
+                  <button class="btn btn-primary border-success align-items-center btn-success" *ngSwitchDefault type="submit">Next<i
+                    class="fa fa-angle-right ml-2"></i></button>
                 </div>
               </form>
             </div>
